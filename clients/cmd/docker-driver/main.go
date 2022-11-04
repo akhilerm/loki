@@ -5,6 +5,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
+	"time"
 
 	"github.com/docker/go-plugins-helpers/sdk"
 	"github.com/go-kit/log"
@@ -41,7 +42,12 @@ func main() {
 	pprofPort := os.Getenv("PPROF_PORT")
 	if pprofPort != "" {
 		go func() {
-			err := http.ListenAndServe(fmt.Sprintf(":%s", pprofPort), nil)
+			server := &http.Server{
+				Addr:              fmt.Sprintf(":%s", pprofPort),
+				ReadHeaderTimeout: 1 * time.Minute,
+			}
+
+			err := server.ListenAndServe()
 			logger.Log("msg", "http server stopped", "err", err)
 		}()
 	}

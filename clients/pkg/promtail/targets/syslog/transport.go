@@ -205,6 +205,7 @@ func newTLSConfig(certFile string, keyFile string, caFile string) (*tls.Config, 
 
 	tlsConfig := &tls.Config{
 		Certificates: []tls.Certificate{certs},
+		MinVersion:   tls.VersionTLS12,
 	}
 
 	if caFile != "" {

@@ -60,6 +60,7 @@ const (
 	// PrometheusCAFile declares the path for prometheus CA file for service monitors.
 	PrometheusCAFile string = "/etc/prometheus/configmaps/serving-certs-ca-bundle/service-ca.crt"
 	// BearerTokenFile declares the path for bearer token file for service monitors.
+	// #nosec G101 -- This is a false positive
 	BearerTokenFile string = "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
 	// labelJobComponent is a ServiceMonitor.Spec.JobLabel.

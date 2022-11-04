@@ -173,8 +173,7 @@ func (c *Client) Get(path string) (*http.Response, error) {
 
 // Get all the metrics
 func (c *Client) Metrics() (string, error) {
-	url := fmt.Sprintf("%s/metrics", c.baseURL)
-	res, err := http.Get(url)
+	res, err := http.Get(fmt.Sprintf("%s/metrics", c.baseURL))
 	if err != nil {
 		return "", err
 	}
