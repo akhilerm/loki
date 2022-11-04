@@ -125,7 +125,7 @@ func (i *indexClient) getUploaderName() (string, error) {
 		if !os.IsNotExist(err) {
 			return "", err
 		}
-		if err := os.WriteFile(uploaderFilePath, []byte(uploader), 0o666); err != nil {
+		if err := os.WriteFile(uploaderFilePath, []byte(uploader), 0600); err != nil {
 			return "", err
 		}
 	} else {

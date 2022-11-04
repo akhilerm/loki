@@ -1,7 +1,7 @@
 package manifests
 
 import (
-	"crypto/sha1"
+	"crypto/sha256"
 	"fmt"
 	"strings"
 
@@ -28,7 +28,7 @@ func LokiConfigMap(opt Options) (*corev1.ConfigMap, string, error) {
 		return nil, "", err
 	}
 
-	s := sha1.New()
+	s := sha256.New()
 	_, err = s.Write(c)
 	if err != nil {
 		return nil, "", err

@@ -14,10 +14,12 @@ import (
 
 const (
 	// EnvGoogleApplicationCredentials is the environment variable to specify path to key.json
+	// #nosec G101 -- This is a false positive
 	EnvGoogleApplicationCredentials = "GOOGLE_APPLICATION_CREDENTIALS"
 	// GCSFileName is the file containing the Google credentials for authentication
 	GCSFileName = "key.json"
 
+	// #nosec G101 -- This is a false positive
 	secretDirectory = "/etc/storage/secrets"
 	caDirectory     = "/etc/storage/ca"
 )

@@ -1,7 +1,7 @@
 package manifests
 
 import (
-	"crypto/sha1"
+	"crypto/sha256"
 	"fmt"
 	"path"
 	"regexp"
@@ -357,7 +357,7 @@ func gatewayConfigMap(opt Options) (*corev1.ConfigMap, string, error) {
 		return nil, "", err
 	}
 
-	s := sha1.New()
+	s := sha256.New()
 	_, err = s.Write(tenantsConfig)
 	if err != nil {
 		return nil, "", err

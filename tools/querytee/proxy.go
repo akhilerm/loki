@@ -196,9 +196,10 @@ func (p *Proxy) Start() error {
 
 	p.srvListener = listener
 	p.srv = &http.Server{
-		ReadTimeout:  1 * time.Minute,
-		WriteTimeout: 2 * time.Minute,
-		Handler:      router,
+		ReadTimeout:       1 * time.Minute,
+		ReadHeaderTimeout: 1 * time.Minute,
+		WriteTimeout:      2 * time.Minute,
+		Handler:           router,
 	}
 
 	// Run in a dedicated goroutine.

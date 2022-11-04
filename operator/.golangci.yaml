@@ -34,8 +34,11 @@ linters:
   - staticcheck # Staticcheck is a go vet on steroids, applying a ton of static analysis checks
   - typecheck # Like the front-end of a Go compiler, parses and type-checks Go code
   - unused # Checks Go code for unused constants, variables, functions and types
+  - gosec # Inspects source code for security problems
 
 issues:
+  exclude:
+    - G404 # Insecure random number source (rand)
   exclude-use-default: false
   exclude-rules:
     # - text: "could be of size"

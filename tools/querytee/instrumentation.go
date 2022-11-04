@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"time"
 
 	"github.com/go-kit/log/level"
 	"github.com/gorilla/mux"
@@ -39,7 +40,8 @@ func (s *InstrumentationServer) Start() error {
 	router.Handle("/metrics", promhttp.HandlerFor(s.registry, promhttp.HandlerOpts{}))
 
 	s.srv = &http.Server{
-		Handler: router,
+		Handler:           router,
+		ReadHeaderTimeout: 1 * time.Minute,
 	}
 
 	go func() {

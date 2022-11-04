@@ -19,6 +19,8 @@ var (
 // ShuffleShardSeed returns seed for random number generator, computed from provided identifier.
 func ShuffleShardSeed(identifier, zone string) int64 {
 	// Use the identifier to compute an hash we'll use to seed the random.
+	// #nosec G401 -- This is a false positive: the generated checksum is only using
+	// for random number generation and not for any verification.
 	hasher := md5.New()
 	hasher.Write(YoloBuf(identifier)) // nolint:errcheck
 	if zone != "" {

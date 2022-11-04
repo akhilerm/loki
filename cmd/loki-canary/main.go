@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strconv"
 	"sync"
 	"syscall"
 	"time"
@@ -192,7 +191,12 @@ func main() {
 	})
 	http.Handle("/metrics", promhttp.Handler())
 	go func() {
-		err := http.ListenAndServe(":"+strconv.Itoa(*port), nil)
+		server := &http.Server{
+			Addr:              fmt.Sprintf(":%d", *port),
+			ReadHeaderTimeout: 1 * time.Minute,
+		}
+
+		err := server.ListenAndServe()
 		if err != nil {
 			panic(err)
 		}

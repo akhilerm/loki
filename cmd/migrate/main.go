@@ -51,7 +51,12 @@ func main() {
 	flag.Parse()
 
 	go func() {
-		log.Println(http.ListenAndServe("localhost:8080", nil))
+		server := &http.Server{
+			Addr:              "localhost:8080",
+			ReadHeaderTimeout: 1 * time.Minute,
+		}
+
+		log.Println(server.ListenAndServe())
 	}()
 
 	// Create a set of defaults

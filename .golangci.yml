@@ -73,6 +73,7 @@ linters:
     - goimports
     - gosimple
     - staticcheck
+    - gosec
   disable:
     - unused
     - unparam
@@ -82,5 +83,13 @@ issues:
     - Error return value of .*log\.Logger\)\.Log\x60 is not checked
     - Error return value of .*.Log.* is not checked
     - Error return value of `` is not checked
-
+    - G108 # Profiling endpoint automatically exposed on /debug/pprof
+    - G402 # Look for bad TLS connection settings
+    - G404 # Insecure random number source (rand)
+    - G501 # Import blocklist: crypto/md5
+    - G601 # Implicit memory aliasing of items from a range statement
+  exclude-rules:
+    - path: (.+)_test.go
+      linters:
+        - gosec
   fix: true
